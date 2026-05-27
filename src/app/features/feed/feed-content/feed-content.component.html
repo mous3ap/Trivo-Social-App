@@ -6,7 +6,7 @@
   <div class="flex items-start gap-4">
 
     <div class="avatar-gradient rounded-full shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.25)]">
-      <img [src]="currentUser.photo" alt="Daniel"
+      <img [src]="currentUser.photo" [alt]="currentUser.name"
            class="w-10 h-10 rounded-full object-cover border-2 border-[#090a19]">
     </div>
 
@@ -18,7 +18,7 @@
       <textarea
       [formControl] = "content"
         class="w-full rounded-base resize-none bg-transparent text-[#e2e8f0] text-[15px] placeholder:text-gray-500 focus:outline-none focus:ring-purple-300/30 py-1.5 font-normal tracking-wide border-none transition-all duration-200"
-        placeholder="What's happening, Mousap?"></textarea>
+        placeholder="What's happening, {{currentUser.name}}?"></textarea>
 
       @if (imgUrl) {
         <div class="relative mt-3 rounded-2xl overflow-hidden border border-white/10 group max-h-[340px] w-full">

@@ -1,0 +1,5 @@
+.glass-active {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.25) 0%, rgba(59, 130, 246, 0.15) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(168, 85, 247, 0.15);
+        }

@@ -1,0 +1,15 @@
+.glass-effect {
+            background: rgba(17, 19, 45, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-btn {
+            background: linear-gradient(90deg, #8b5cf6 0%, #3b82f6 100%);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }

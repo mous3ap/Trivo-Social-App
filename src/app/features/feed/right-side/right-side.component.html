@@ -1,0 +1,126 @@
+<aside class="w-80 bg-[#090a1a]/60 border-l fixed border-white/5 rounded-3xl p-4">
+
+    <div>
+        <div class="flex items-center justify-between border-b border-white/5 pb-3 mb-4 px-1">
+            <h3 class="text-base font-bold text-white">
+                Suggested Connections
+            </h3>
+            <a routerLink="/suggestions" class="text-xs text-gray-400 hover:text-purple-400 font-medium transition duration-200">
+                View More
+            </a>
+   
+        </div>
+
+        <div class="relative mb-4">
+            <span class="absolute inset-y-0 left-3 flex items-center text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </span>
+            <input 
+                type="text" 
+                placeholder="Search connections..." 
+                class="w-full bg-[#131531]/40 border border-white/5 rounded-xl py-2 pl-9 pr-3 text-xs text-gray-200 placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/30 focus:bg-[#131531]/70 transition-all"
+            >
+        </div>
+           <ul class="space-y-4">
+
+             @for (suggest of suggestions; track suggest._id) {
+
+            
+
+            <li class="flex items-center gap-3">
+                <div 
+    class="p-[1.5px] bg-gradient-to-tr from-purple-500 to-blue-500 rounded-full shrink-0 shadow-lg shadow-purple-500/10 cursor-pointer"
+
+    [routerLink]="['/profile', suggest._id]"
+>
+
+    <img
+        [src]="suggest.photo"
+        [alt]="suggest.name"
+        class="rounded-full w-10 h-10 object-cover border border-[#090a1a]"
+    >
+
+                </div>
+
+                <div class="flex-1 min-w-0">
+                    <span 
+                        class="text-white text-sm font-semibold block truncate cursor-pointer hover:text-purple-400 transition"
+
+                        [routerLink]="['/profile', suggest._id]"
+                    >
+                        {{ suggest.name }}
+                    </span>
+                    <p class="text-[11px] text-gray-500 truncate">
+                       @{{ suggest.username }}
+                    </p>
+                    <p class="text-[11px] text-gray-400 mt-0.5">
+                        {{suggest.followersCount}} Followers
+                    </p>
+                </div>
+
+                <button 
+    (click)="followUser(suggest._id)"
+    [class.bg-purple-600]="!suggest.isFollowing"
+    [class.bg-emerald-500]="suggest.isFollowing"
+    [class.text-white]="true"
+    class="cursor-pointer shrink-0 flex items-center justify-center gap-1.5 px-3.5 py-1.5 
+           bg-gradient-to-r from-blue-600 to-purple-500 
+           hover:opacity-90 transition-all duration-200 
+           text-xs font-semibold rounded-xl 
+           shadow-md shadow-blue-600/20"
+>
+    
+    @if (!suggest.isFollowing) {
+
+        <!-- Follow Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke-width="2.5"
+             stroke="currentColor"
+             class="w-3.5 h-3.5 text-white">
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 
+                     3.375 3.375 0 0 1 6.75 0ZM3 20.25a7.5 7.5 0 0 1 15 0v.75H3v-.75Z" />
+        </svg>
+
+        <span>Follow</span>
+
+    } @else {
+
+        <!-- Following Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke-width="2.5"
+             stroke="currentColor"
+             class="w-3.5 h-3.5 text-white">
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75m6 2.25a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+
+        <span>Following</span>
+
+    }
+
+               </button>
+            </li>
+
+           
+
+            
+
+       
+        }
+
+           </ul>
+       
+    </div>
+
+       </aside>

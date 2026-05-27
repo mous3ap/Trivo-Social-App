@@ -1,0 +1,98 @@
+<Section class="flex flex-col gap-6">
+
+        <!----Create Post---->
+    <div class="glass-active w-full max-w-205 glass-card rounded-3xl p-5 shadow-2xl shadow-black/40">
+
+  <div class="flex items-start gap-4">
+
+    <div class="avatar-gradient rounded-full shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.25)]">
+      <img src="/profile-2.png" alt="Daniel"
+           class="w-10 h-10 rounded-full object-cover border-2 border-[#090a19]">
+    </div>
+
+    <form
+    #form
+    (submit)="submitForm($event , form)"
+     class="w-full flex flex-col justify-between min-h-24">
+
+      <textarea
+      [formControl] = "content"
+        class="w-full rounded-base resize-none bg-transparent text-[#e2e8f0] text-[15px] placeholder:text-gray-500 focus:outline-none focus:ring-purple-300/30 py-1.5 font-normal tracking-wide border-none transition-all duration-200"
+        placeholder="What's happening, Mousap?"></textarea>
+
+      @if (imgUrl) {
+        <div class="relative mt-3 rounded-2xl overflow-hidden border border-white/10 group max-h-[340px] w-full">
+          <img [src]="imgUrl" alt="Preview" class="w-full h-full object-cover">
+
+          <button type="button"
+                  (click)="imgUrl = ''"
+                  class="cursor-pointer absolute top-3 right-3 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke-width="2" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      }
+
+      <div class="flex items-center justify-between border-t border-white/5 pt-4 mt-4">
+
+        <div class="flex flex-wrap items-center gap-2">
+
+          <input (change)="changeImg($event)" type="file" id="file_input" class="hidden" />
+
+          <label for="file_input"
+                 class="cursor-pointer flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl text-xs text-gray-300 font-medium transition-all duration-200 hover:scale-[1.02]">
+            <svg xmlns="http://www.w3.org/2000/xl" fill="none" viewBox="0 0 24 24"
+                 stroke-width="1.8" stroke="currentColor" class="w-4 h-4 text-purple-400">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V6.75z" />
+            </svg>
+            Photo
+          </label>
+
+          <button type="button"
+                  class="flex items-center gap-2 px-4 py-2 cursor-pointer bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl text-xs text-gray-300 font-medium transition-all duration-200">
+            <svg xmlns="http://www.w3.org/2000/xl" fill="none" viewBox="0 0 24 24"
+                 stroke-width="1.8" stroke="currentColor" class="w-4 h-4 text-yellow-400">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M15.182 15.182a4.5 4.5 0 01-6.364 0M12 18.75V21m-4.705-1.95l-1.591 1.591M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm6 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75z" />
+            </svg>
+            Feeling
+          </button>
+
+        </div>
+
+        <button type="submit"
+                class="shrink-0 px-6 py-2.5 cursor-pointer bg-linear-to-r from-[#4f46e5] to-[#7c3aed] hover:from-[#4338ca] hover:to-[#6d28d9] text-white text-xs font-semibold rounded-xl transition-all duration-200 flex items-center gap-2 shadow-[0_4px_20px_rgba(124,58,237,0.25)] hover:scale-[1.02] active:scale-[0.98]">
+          <svg xmlns="http://www.w3.org/2000/xl" viewBox="0 0 24 24"
+               fill="currentColor" class="w-3.5 h-3.5 transform rotate-310">
+            <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+          </svg>
+          Post
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+    <!-----List Posts-------->
+    @for (post of postData; track post._id) {
+        <app-post-card
+[post]="post"
+(deleted)="onPostDeleted($event)">
+</app-post-card>
+
+}
+
+</Section>
+
+
+
+
+

@@ -1,0 +1,141 @@
+<div class="relative w-full h-full max-w-none glass-effect rounded-none lg:rounded-[40px] 
+            p-8 md:p-10 shadow-2xl overflow-hidden flex flex-col justify-center">
+        
+        <!-- Background Orbs -->
+        <div class="absolute -top-20 -right-20 w-48 h-48 bg-purple-600/20 rounded-full blur-[60px]"></div>
+        <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-600/20 rounded-full blur-[60px]"></div>
+
+        <!-- Navbar/Header -->
+        <div class="flex justify-between items-center mb-8 relative z-10">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 gradient-btn rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">T</span>
+                </div>
+                <span class="text-white text-xl font-bold tracking-tight">Trivo</span>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="flex justify-between items-start mb-8 relative z-10">
+            <div>
+                <h1 class="text-white text-4xl font-bold leading-tight">Welcome <br> back!</h1>
+                <p class="text-gray-400 text-sm mt-3 leading-relaxed">
+                    Good to see you again. <br>
+                    Let's pick up the <span class="text-purple-400 font-medium">conversation.</span>
+                </p>
+            </div>
+            
+            <!-- Illustration Placeholder (Floating 3D bubbles style) -->
+            <div class="relative w-24 h-24">
+                <div class="absolute top-0 right-0 w-16 h-12 bg-purple-500 rounded-2xl -sm opacity-50 blur animate-bounce z-auto"></div>
+                <div class="absolute bottom-2 left-2 w-12 h-10 bg-blue-500 rounded-2xl -sm opacity-40 blur animate-bounce z-auto"></div>
+                <div class="absolute top-4 left-4 w-4 h-4 bg-pink-400 rounded-full  animate-ping  opacity-60"></div>
+            </div>
+        </div>
+
+        <!-- Inputs Section -->
+        <Form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="space-y-4 relative z-10">
+           
+            <!-- Email Input -->
+            <div class="relative group">
+                <span class="absolute top-1/2 left-4 -translate-y-1/2 flex items-center text-gray-500 group-focus-within:text-purple-400 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </span>
+                <input
+                 [class] = "{ 'border-red-500' : loginForm.get('email')?.invalid && submitted }"
+                 formControlName = "email" id="email" type="email" placeholder="Email" class="w-full bg-[#161937] border border-dark rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all required:*:**:invalid:border-red-500">
+            </div>
+
+            @if(loginForm.get('email')?.invalid && submitted ){
+                <div class="flex mb-4 text-sm text-fg-danger-strong " role="alert">
+             <svg class="w-4.5 h-4.5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+             @if(loginForm.get('email')?.hasError('required')){<span class="list-disc list-outside space-y-1 ps-1.5">email is required</span>}             </div>
+                 </div> 
+            } 
+
+            <!-- Password Input -->
+            <div class="relative group">
+                <span class="absolute top-1/2 left-4 -translate-y-1/2 flex items-center text-gray-500 group-focus-within:text-purple-400 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </span>
+                <input
+                [class] = "{ 'border-red-500' : loginForm.get('password')?.invalid && submitted }"
+                 formControlName = "password" id="password" type="password" placeholder="Password" class="w-full bg-[#161937] border border-dark rounded-2xl py-4 pl-12 pr-16 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all required:*:**:invalid:border-red-500">
+               <a class="absolute top-1/2 right-4 -translate-y-1/2 text-purple-400 text-sm font-medium hover:text-purple-300 cursor-pointer transition-colors" routerLink="/forget-password">Forgot?</a>                
+            </div>
+
+            @if(loginForm.get('password')?.invalid && submitted){
+                <div class="flex mb-4 text-sm text-fg-danger-strong " role="alert">
+             <svg class="w-4.5 h-4.5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+             @if(loginForm.get('password')?.hasError('required')){<span class="list-disc list-outside space-y-1 ps-1.5">password is required</span>}
+             @else if (loginForm.get('password')?.hasError('pattern')) {<span class="list-disc list-outside space-y-1 ps-1.5">Password must be at least 8 characters long</span>}
+             </div>
+                 </div> 
+            } 
+
+
+            <!-- Remember Me -->
+           <div class="flex items-center">
+    <input checked id="checked-checkbox" type="checkbox" value="" class="w-4.5 h-4.5 border border-default-medium rounded-3xl bg-neutral-secondary-medium">
+    <label for="checked-checkbox" class="select-none ms-2 text-sm font-medium text-gray-400">Remember me</label>
+           </div>
+
+        
+            <!-- login Button -->
+            <button  class="cursor-pointer w-full h-14 gradient-btn rounded-2xl text-white font-semibold text-lg flex items-center justify-center gap-2 shadow-lg shadow-purple-600/20 hover:scale-[1.01] active:scale-[0.99] transition-all group">
+                Log in
+                @if (loading) {
+                    <div role="status">
+    <svg aria-hidden="true" class="inline w-6 h-6 text-neutral-tertiary animate-spin fill-purple" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+    </svg>
+    <span class="sr-only">Loading...</span>
+</div>
+                }
+            </button>
+
+            @if (msgError) {
+                <div class="flex items-start sm:items-center p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+  <svg class="w-4 h-4 me-2 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+  <p class="font-medium me-1">{{msgError}}</p>
+</div>
+            }
+
+            <!-- Divider -->
+            <div class="flex items-center gap-4 py-4">
+                <div class="flex-1 h-[1px] bg-white/10"></div>
+                <span class="text-gray-500 text-xs">or Continue with</span>
+                <div class="flex-1 h-[1px] bg-white/10"></div>
+            </div>
+
+            <!-- Social Buttons -->
+            <div class="grid grid-cols-2 gap-3">
+                <button class="bg-[#161937] border border-white/5 rounded-2xl py-3 flex justify-center hover:bg-white/5 transition">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
+                </button>
+                <button class="bg-[#161937] border border-white/5 rounded-2xl py-3 flex justify-center hover:bg-white/5 transition">
+                    <img src="https://www.svgrepo.com/show/511330/apple-173.svg" class="w-5 h-5 invert" alt="Apple">
+                </button>
+            </div>
+        </Form>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center relative z-10">
+            <p class="text-gray-400 text-sm">
+                Don't have an account? 
+                <a routerLink="/register" class="text-purple-400 font-bold hover:underline ml-1">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+
+

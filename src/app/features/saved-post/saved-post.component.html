@@ -1,0 +1,65 @@
+<div class="min-h-screen bg-[#070814] text-[#e2e8f0] font-sans antialiased pb-12 relative overflow-hidden">
+    
+    <div class="absolute top-[-5%] right-[-5%] w-[500px] h-[500px] rounded-full bg-purple-900/10 blur-[150px] pointer-events-none"></div>
+    <div class="absolute bottom-[10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-900/10 blur-[180px] pointer-events-none"></div>
+
+    <div class="w-full max-w-4xl mx-auto px-6 pt-6 relative z-10 mt-16">
+        
+        <div class="mb-6">
+            <button 
+            routerLink="/feed"
+            class="cursor-pointer flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium px-4 py-2 rounded-xl bg-[#0d0f2d]/30 border border-white/5 backdrop-blur-md transition-all duration-200 group">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform group-hover:-translate-x-0.5 transition-transform">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+                Back to feed
+            </button>
+        </div>
+
+        <div class="w-full bg-[#0d0f2d]/20 border border-white/5 rounded-[28px] backdrop-blur-xl p-6 md:p-8 shadow-2xl shadow-black/60">
+            
+            <div class="flex items-center justify-between border-b border-white/5 pb-6 mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="text-purple-400 bg-purple-500/10 p-2 rounded-xl border border-purple-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                             class="h-6 w-6" 
+                             fill="none" 
+                             viewBox="0 0 24 24" 
+                             stroke="currentColor">
+
+                            <path 
+                                d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" 
+                                stroke-linecap="round" 
+                                stroke-linejoin="round" 
+                                stroke-width="1.8" />
+        
+                                         </svg>
+                    </div>
+                    <h1 class="text-xl font-bold text-white tracking-wide">All saved posts</h1>
+                </div>
+                <span class="px-3 py-1 rounded-full bg-white/5 border border-white/5 text-gray-400 text-xs font-bold tracking-wider">
+                    {{ savedPosts.length }}
+                </span>
+            </div>
+
+           
+
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-4 ">
+                
+               @for (post of savedPosts; track post._id) {
+
+             <app-post-card [post]="post"></app-post-card>
+    }
+
+            </div>
+
+            
+
+        </div>
+
+    </div>
+</div>
+
+
+
+ 

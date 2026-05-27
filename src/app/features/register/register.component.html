@@ -1,0 +1,238 @@
+<div class="relative w-full h-full max-w-none glass-effect rounded-none lg:rounded-[40px] 
+            p-8 md:p-10 shadow-2xl overflow-hidden flex flex-col justify-center">
+        
+        <!-- Background Orbs -->
+        <div class="absolute -top-20 -right-20 w-48 h-48 bg-purple-600/20 rounded-full blur-[60px]"></div>
+        <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-blue-600/20 rounded-full blur-[60px]"></div>
+
+        <!-- Navbar/Header -->
+        <div class="flex justify-between items-center mb-8 relative z-10">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 gradient-btn rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">T</span>
+                </div>
+                <span class="text-white text-xl font-bold tracking-tight">Trivo</span>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="flex justify-between items-start mb-8 relative z-10">
+            <div>
+                <h1 class="text-white text-4xl font-bold leading-tight">Create your <br><span class="text-purple-400">Trivo</span> account</h1>
+                <p class="text-gray-400 text-sm mt-3 leading-relaxed">
+                    Join communities, share moments, <br>
+                    and stay connected in <span class="text-purple-400 font-medium">real-time</span>.
+                </p>
+            </div>
+            
+            <!-- Illustration Placeholder (Floating 3D bubbles style) -->
+            <div class="relative w-24 h-24">
+                <div class="absolute top-0 right-0 w-16 h-12 bg-purple-500 rounded-2xl -sm opacity-50 blur animate-bounce z-auto"></div>
+                <div class="absolute bottom-2 left-2 w-12 h-10 bg-blue-500 rounded-2xl -sm opacity-40 blur animate-bounce z-auto"></div>
+                <div class="absolute top-4 left-4 w-4 h-4 bg-pink-400 rounded-full  animate-ping  opacity-60"></div>
+            </div>
+        </div>
+
+        <!-- Inputs Section -->
+        <Form [formGroup]="registerForm" (ngSubmit)="submitForm()" class="space-y-4 relative z-10">
+            <!-- Full Name Input -->
+            <div class="relative group">
+                <span class="absolute inset-y-0 left-4 top-6 flex items-center text-gray-500 group-focus-within:text-purple-400 transition-colors">
+               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z"/></svg> 
+                </span>
+
+                <label for="full_name" class="block mb-1.5 text-sm font-light text-gray-300">Full name</label>
+                <input 
+                [class]="{ 'border-red-500' : registerForm.get('name')?.invalid && registerForm.get('name')?.touched , 
+                    'border-green-500' : registerForm.get('name')?.valid 
+                 }"
+                 formControlName = "name"   id="full_name" type="text" placeholder="Enter your full name" class=" w-full bg-[#161937] border border-dark rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all">              
+            </div>
+            @if(registerForm.get('name')?.invalid && registerForm.get('name')?.touched){
+                <div class="flex mb-4 text-sm text-fg-danger-strong " role="alert">
+             <svg class="w-4.5 h-4.5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+             @if(registerForm.get('name')?.hasError('required')){<span class="list-disc list-outside space-y-1 ps-1.5">Full name is required</span>}
+             @else if (registerForm.get('name')?.hasError('minlength')) {<span class="list-disc list-outside space-y-1 ps-1.5">Name must be at least 3 characters long</span>}
+             </div>
+                 </div> 
+            }  
+                    
+            <!-- Email Input -->
+            <div class="relative group">
+                <span class="absolute inset-y-0 left-4 top-6 flex items-center text-gray-500 group-focus-within:text-purple-400 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </span>
+                <label for="email" class="block mb-1.5 text-sm font-light text-gray-300">Email</label>
+                <input
+                [class] = "{ 'border-red-500' : registerForm.get('email')?.invalid && registerForm.get('email')?.touched ,
+                    'border-green-500' : registerForm.get('email')?.valid 
+                 }"
+                 formControlName = "email" id="email" type="email" placeholder="name@example.com" class="w-full bg-[#161937] border border-dark rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all required:*:**:invalid:border-red-500">
+            </div>
+
+            @if(registerForm.get('email')?.invalid && registerForm.get('email')?.touched){
+                <div class="flex mb-4 text-sm text-fg-danger-strong " role="alert">
+             <svg class="w-4.5 h-4.5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+             @if(registerForm.get('email')?.hasError('required')){<span class="list-disc list-outside space-y-1 ps-1.5">email is required</span>}
+             @else if (registerForm.get('email')?.hasError('email')) {<span class="list-disc list-outside space-y-1 ps-1.5">Please enter a valid email</span>}
+             </div>
+                 </div> 
+            } 
+
+            <!-- Password Input -->
+            <div class="relative group">
+                <span class="absolute inset-y-0 left-4 top-6 flex items-center text-gray-500 group-focus-within:text-purple-400 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </span>
+                <label for="password" class="block mb-1.5 text-sm font-light text-gray-300">Password</label>
+                <input
+                [class] = "{ 'border-red-500' : registerForm.get('password')?.invalid && registerForm.get('password')?.touched,
+                             'border-green-500' : registerForm.get('password')?.valid && registerForm.get('password')?.touched }"
+                 formControlName = "password" id="password" type="password" placeholder="Create strong password" class="w-full bg-[#161937] border border-dark rounded-2xl py-4 pl-12  text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all required:*:**:invalid:border-red-500">
+            </div>
+            @if(registerForm.get('password')?.invalid && registerForm.get('password')?.touched){
+                <div class="flex mb-4 text-sm text-fg-danger-strong " role="alert">
+             <svg class="w-4.5 h-4.5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+             @if(registerForm.get('password')?.hasError('required')){<span class="list-disc list-outside space-y-1 ps-1.5">password is required</span>}
+             @else if (registerForm.get('password')?.hasError('pattern')) {<span class="list-disc list-outside space-y-1 ps-1.5">Password must be at least 8 characters long</span>}
+             </div>
+                 </div> 
+            } 
+
+            <!-- Confirm Password Input -->
+            <div class="relative group">
+                <span class="absolute inset-y-0 left-4 top-6 flex items-center text-gray-500 group-focus-within:text-purple-400 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </span>
+                <label for="confirm_password" class="block mb-1.5 text-sm font-light text-gray-300">Confirm Password</label>
+                <input 
+                [class] = "{ 'border-red-500' : registerForm.get('rePassword')?.invalid && registerForm.get('rePassword')?.touched ,
+                             'border-green-500' : registerForm.get('rePassword')?.valid && registerForm.get('rePassword')?.touched }"
+                formControlName = "rePassword" id="confirm_password" type="password" placeholder="Confirm your password" class="w-full bg-[#161937] border border-dark rounded-2xl py-4 pl-12  text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all required:*:**:invalid:border-red-500">
+            </div>
+            @if(registerForm.get('rePassword')?.invalid && registerForm.get('rePassword')?.touched){
+                <div class="flex mb-4 text-sm text-fg-danger-strong " role="alert">
+             <svg class="w-4.5 h-4.5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+             @if(registerForm.get('rePassword')?.hasError('required')){<span class="list-disc list-outside space-y-1 ps-1.5">confirm password is required</span>}
+             @else if (registerForm.hasError('mismatch')) {<span class="list-disc list-outside space-y-1 ps-1.5">Passwords do not match</span>}
+             </div>
+                 </div> 
+            }
+
+            <!-- Gender & Date -->
+             <div class="grid grid-cols-2 gap-3">
+                
+                <!-- Select Gender -->
+                <div class="relative group ">
+                <span class="absolute inset-y-0 left-4 top-6 flex items-center text-gray-500 group-focus-within:text-purple-400 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 32 32" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 10.5C4 10.224 4.224 10 4.5 10h8c.276 0 .5.224.5.5V20M20 10.358c.063-.211.26-.358.479-.358h6.468c.22 0 .411.141.477.351l2.873 9.188M6 19v11.5c0 .276.224.5.5.5H8V21m3-2v11.5c0 .276-.224.5-.5.5H9M20 23v7.5c0 .276.224.5.5.5H23v-9m3 1v7.5c0 .276-.224.5-.5.5H24M5.683 3.5a2.5 2.5 0 1 1 5 0a2.5 2.5 0 0 1-5 0ZM21.14 3.5a2.5 2.5 0 1 1 5 0a2.5 2.5 0 0 1-5 0Z"/></svg>
+                </span>
+
+                <label for="gender" class="block mb-1.5 text-sm font-light text-gray-300">Gender</label>
+                <select 
+                [class] = "{ 'border-red-500' : registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched ,
+                             'border-green-500' : registerForm.get('gender')?.valid && registerForm.get('gender')?.touched }"
+                formControlName = "gender" id="gender" class="w-full bg-[#161937] border border-dark rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all required:*:**:invalid:border-red-500">
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            @if(registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched){
+                <div class="flex mb-4 text-sm text-fg-danger-strong " role="alert">
+             <svg class="w-4.5 h-4.5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+             @if(registerForm.get('gender')?.hasError('required')){<span class="list-disc list-outside space-y-1 ps-1.5">gender is required</span>}
+             </div>
+                 </div> 
+            } 
+
+            
+
+            <!-- Select date -->
+                <div class="relative group ">
+                <span class="absolute inset-y-0 left-4 top-6 flex items-center text-gray-500 group-focus-within:text-purple-400 transition-colors">
+                    <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><rect x="6" y="12" width="3" height="3" rx="0.5" fill="currentColor"></rect><rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="currentColor"></rect><rect x="15" y="12" width="3" height="3" rx="0.5" fill="currentColor"></rect></svg>
+                </span>
+
+                <label for="date" class="block mb-1.5 text-sm font-light text-gray-300">Date of Birth</label>
+                <input 
+                [class] = "{ 'border-red-500' : registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched ,
+                             'border-green-500' : registerForm.get('dateOfBirth')?.valid && registerForm.get('dateOfBirth')?.touched }"
+                formControlName = "dateOfBirth" type="date" id="date" class="w-full bg-[#161937] border border-dark rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500/50 transition-all required:*:**:invalid:border-red-500">
+            </div>
+
+            @if(registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched){
+                <div class="flex mb-4 text-sm text-fg-danger-strong " role="alert">
+             <svg class="w-4.5 h-4.5 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+              <span class="sr-only">Danger</span>
+              <div>
+             @if(registerForm.get('dateOfBirth')?.hasError('required')){<span class="list-disc list-outside space-y-1 ps-1.5">date is required</span>}
+             </div>
+                 </div> 
+            } 
+
+
+             </div>
+            <!-- Register Button -->
+            <button  class="cursor-pointer w-full h-14 gradient-btn rounded-2xl text-white font-semibold text-lg flex items-center justify-center gap-2 shadow-lg shadow-purple-600/20 hover:scale-[1.01] active:scale-[0.99] transition-all group">
+                Create Account
+                @if (loading) {
+                    <div role="status">
+    <svg aria-hidden="true" class="inline w-6 h-6 text-neutral-tertiary animate-spin fill-purple" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+    </svg>
+    <span class="sr-only">Loading...</span>
+</div>
+                }
+            </button>
+
+            @if (msgError) {
+                <div class="flex items-start sm:items-center p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+  <svg class="w-4 h-4 me-2 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+  <p class="font-medium me-1">{{msgError}}</p>
+</div>
+            }
+
+            <!-- Divider -->
+            <div class="flex items-center gap-4 py-4">
+                <div class="flex-1 h-[1px] bg-white/10"></div>
+                <span class="text-gray-500 text-xs">or Sign up with</span>
+                <div class="flex-1 h-[1px] bg-white/10"></div>
+            </div>
+
+            <!-- Social Buttons -->
+            <div class="grid grid-cols-2 gap-3">
+                <button class="bg-[#161937] border border-white/5 rounded-2xl py-3 flex justify-center hover:bg-white/5 transition">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
+                </button>
+                <button class="bg-[#161937] border border-white/5 rounded-2xl py-3 flex justify-center hover:bg-white/5 transition">
+                    <img src="https://www.svgrepo.com/show/511330/apple-173.svg" class="w-5 h-5 invert" alt="Apple">
+                </button>
+            </div>
+        </Form>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center relative z-10">
+            <p class="text-gray-400 text-sm">
+                Already have an account? 
+                <a routerLink="/login" class="text-purple-400 font-bold hover:underline ml-1">Sign in</a>
+            </p>
+        </div>
+    </div>

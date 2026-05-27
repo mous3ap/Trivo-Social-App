@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import "primeicons/primeicons.css";
+@import "flowbite/src/themes/default";
+@import "primeicons/primeicons.css";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+@tailwind utilities;
+
+@utility container {
+    margin-inline:auto;
+}
+
+@theme{
+    --color-primary-color: #00298D;
+    --color-secondary-color: #F0F2F5;
+}
+
+body {
+    @apply bg-[#0a1526] text-white;
+    font-family: "SN Pro", sans-serif;
+}
+
+.ngx-spinner-overlay.fade-out {
+  pointer-events: none !important;
+}

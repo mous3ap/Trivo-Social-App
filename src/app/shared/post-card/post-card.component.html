@@ -1,0 +1,208 @@
+<div [class]="'glass-card w-full rounded-4xl p-6 ' + customClass" >
+        
+        <div 
+        
+        class="flex items-center justify-between mb-4 ">
+            <div class="flex items-center gap-3">
+                <div class="avatar-gradient rounded-full shadow-lg shadow-purple-500/10">
+                    <img [src]="post.user.photo" 
+                         [alt]="post.user.name" 
+                        [routerLink]="['/profile', post.user._id]"
+                         class="w-11 h-11 rounded-full object-cover border-2 border-[#090a1a] cursor-pointer">
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span 
+                        [routerLink]="['/profile', post.user._id]"
+                        class="text-white text-base font-semibold tracking-wide cursor-pointer hover:text-purple-400 transition">{{post.user.name}}</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-500 font-medium">
+                        <span>@{{post.user.username}}</span>
+                        <span class="w-1 h-1 rounded-full bg-gray-600"></span>
+                        <span>{{post.createdAt}}</span>
+                    </div>
+                </div>
+            </div>
+             
+                         
+            <div class="relative inline-block text-left">
+                <button class="w-9 h-9 cursor-pointer flex items-center justify-center  text-white peer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                    </svg>
+                </button>
+
+                <div class="absolute right-0 top-14 w-70 glass-dropdown rounded-3xl p-2.5 z-50 origin-top-right transition-all duration-200 invisible opacity-0 scale-95 pointer-events-none peer-focus:visible peer-focus:opacity-100 peer-focus:scale-100 peer-focus:pointer-events-auto focus-within:visible focus-within:opacity-100 focus-within:scale-100 focus-within:pointer-events-auto">
+                    
+                    <div class="absolute -top-1.5 right-4 w-3 h-3 bg-[#0f122d] border-t border-l border-white/10 rotate-45 transform"></div>
+
+                    <div class="space-y-1 relative z-10">
+                        
+                        <button
+                        (click)="toggleBookmark(post)"
+                          class="w-full flex items-start gap-3.5 px-3.5 py-3 rounded-xl text-left hover:bg-white/5 transition-all duration-200 group/item cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" 
+                            
+                            class="w-5 h-5 text-gray-400 group-hover/item:text-white mt-0.5 transition-colors"
+                            [class.text-purple-400]="post.bookmarked"
+                            [class.fill-purple-400]="post.bookmarked"
+                            [class.text-gray-400]="!post.bookmarked"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25L4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                            </svg>
+                            <div>
+
+                              <span
+                                class="block text-[14px] font-medium tracking-wide"
+                                [class.text-purple-400]="post.bookmarked"
+                                [class.text-white]="!post.bookmarked"
+                              >
+
+                                {{ post.bookmarked ? 'Saved' : 'Save Post' }}
+
+                              </span>
+
+                              <span class="block text-gray-500 text-[11px] mt-0.5">
+
+                                {{
+                                  post.bookmarked
+                                  ? 'Post saved successfully.'
+                                  : 'Add to your reading list.'
+                                }}
+
+                              </span>
+
+                            </div>
+                        </button>
+
+                        @if (post.user._id === postId) {
+                            <a href="#" class="w-full flex items-start gap-3.5 px-3.5 py-3 rounded-xl text-left hover:bg-white/5 transition-all duration-200 group/item">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 text-gray-400 group-hover/item:text-white mt-0.5 transition-colors">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                            </svg>
+                            <div>
+                                <span class="block text-white text-[14px] font-medium tracking-wide">Edit Post</span>
+                                <span class="block text-gray-500 text-[11px] mt-0.5">Change text or visibility.</span>
+                            </div>
+                        </a>
+
+                        <div class="border-t border-white/5 my-1"></div>
+
+                        <button
+                        (click)="removePost(post._id)"
+                         class="w-full flex items-start gap-3.5 px-3.5 py-3 cursor-pointer rounded-xl text-left hover:bg-rose-500/10 transition-all duration-200 group/item">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 text-rose-500 mt-0.5 drop-shadow-[0_0_4px_rgba(244,63,94,0.3)]">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                            <div>
+                                <span class="block text-rose-500 text-[14px] font-semibold tracking-wide drop-shadow-[0_0_4px_rgba(244,63,94,0.2)]">Delete Post</span>
+                                <span class="block text-rose-400/60 text-[11px] mt-0.5">Permanently remove from feed.</span>
+                            </div>
+                        </button>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div [routerLink]="['/details' , post._id]" class="cursor-pointer">
+    
+    <!-- Post Content -->
+    <div class="space-y-3 mb-4 px-1">
+
+        @if (post.body) {
+            <p class="text-gray-200 text-[15px] leading-relaxed tracking-wide font-normal break-words">
+                {{ post.body }}
+            </p>
+        }
+
+        @if (post.image) {
+            <div class="overflow-hidden rounded-2xl border border-white/5 group">
+                <img 
+                    [src]="post.image"
+                    alt="post image"
+                    class="w-full max-h-[500px] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                >
+            </div>
+        }
+
+    </div>
+
+        </div>
+         
+       
+        <div class="flex items-center justify-between pb-4 mt-6 border-b border-white/5 mb-2 px-1">
+            <div class="flex items-center gap-2">
+                <div class="flex items-center -space-x-1.5">
+                   @if (post.likesCount > 0) {
+                      <div class="flex items-center -space-x-1.5">
+                          <span class="w-5 h-5 rounded-full bg-linear-to-tr from-blue-600 to-sky-400 flex items-center justify-center text-[10px] border border-[#0d0e21]">
+                              👍
+                          </span>
+                      </div>
+                  }
+                  
+
+                </div>
+                <span class="text-gray-400 text-sm font-medium tracking-wide">{{post.likesCount}} Likes</span>
+            </div>
+            
+            <div class="flex items-center gap-4 text-sm text-gray-400 font-medium tracking-wide">
+                <span>{{post.commentsCount}} Comments</span>
+                <span>{{post.sharesCount}} Shares</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-1 text-gray-400 text-sm font-medium pt-1 ">
+            <button
+            (click)="toggleLike(post)"
+            class="flex items-center justify-center gap-2.5 cursor-pointer py-2.5 rounded-xl transition-all duration-200"
+
+            
+>
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke-width="1.8"
+         stroke="currentColor"
+         class="w-[21px] h-[21px] transition-all duration-200"
+
+        [class.fill-blue-400]="post.isLiked"
+        [class.stroke-blue-400]="post.isLiked"
+        [class.text-blue-400]="post.isLiked">
+
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602M5.904 18.75A3.375 3.375 0 111.5 15.375c0-1.04.47-1.972 1.213-2.602" />
+                </svg>
+
+                <span>  {{ post.isLiked ? 'Liked' : 'Like' }}</span>
+            </button>
+
+            <button 
+            #el
+            class="flex items-center justify-center gap-2.5 py-2.5 cursor-pointer rounded-xl hover:text-white hover:bg-white/5 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-[21px] h-[21px]">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.482 4.482 0 01-.823 1.764a.75.75 0 00.511 1.184a8.508 8.508 0 002.813-.526c.552-.203 1.157-.138 1.677.164a8.887 8.887 0 001.963.513z" />
+                </svg>
+                <span>Comment</span>
+            </button>
+
+            <button class="flex items-center justify-center gap-2.5 py-2.5 cursor-pointer rounded-xl hover:text-white hover:bg-white/5 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-[21px] h-[21px]">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186a2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185a2.25 2.25 0 00-3.933 2.185z" />
+                </svg>
+                <span>Share</span>
+            </button>
+
+            
+        </div>
+          @defer (on interaction(el)) {
+            <app-post-comment [postId]="post._id"></app-post-comment>
+          }
+
+    </div>

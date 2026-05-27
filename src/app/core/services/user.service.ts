@@ -57,10 +57,13 @@ uploadCover(formData: FormData): Observable<any> {
   );
 }
 
-userData = new BehaviorSubject<any>(null);
+userData = new BehaviorSubject<any>(
+  JSON.parse(localStorage.getItem('socialUser') || 'null')
+);
 
 setUserData(user: any): void {
   this.userData.next(user);
+  localStorage.setItem('socialUser', JSON.stringify(user));
 }
 
 changePassword(data: object): Observable<any> {
@@ -70,6 +73,19 @@ changePassword(data: object): Observable<any> {
   );
 }
 
+updateUserPhoto(photo: string): void {
+  const current = this.userData.value;
+  const updated = { ...current, photo };
+
+  this.setUserData(updated);
+}
+
+updateUserCover(cover: string): void {
+  const current = this.userData.value;
+  const updated = { ...current, cover };
+
+  this.setUserData(updated);
+}
 
 
 

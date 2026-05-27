@@ -21,6 +21,8 @@ export class FeedContentComponent implements OnInit {
   saveFile!: File;
   imgUrl: string | ArrayBuffer | null | undefined ;
   content: FormControl = new FormControl("");
+    currentUser = JSON.parse(localStorage.getItem('socialUser')!);
+
 
 
    

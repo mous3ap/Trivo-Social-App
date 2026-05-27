@@ -4,6 +4,7 @@ import { IFeed } from '../../core/models/i-feed.interface';
 import { PostCommentComponent } from "../../features/feed/feed-content/post-comment/post-comment.component";
 import { PostsService } from '../../core/services/posts.service';
 import { Output, EventEmitter } from '@angular/core';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-post-card',
@@ -14,13 +15,18 @@ import { Output, EventEmitter } from '@angular/core';
 export class PostCardComponent implements OnInit {
 
   private readonly postsService = inject(PostsService);
+  private readonly userService = inject(UserService);
   @Output() deleted = new EventEmitter<string>();
   @Input() customClass: string = '';
   @Input() post!: IFeed;
   postId: string = '';
+  userData: any = null;
 
   ngOnInit(): void {
          this.postId = JSON.parse(localStorage.getItem('socialUser')!)._id; 
+         this.userService.userData.subscribe(user => {
+  this.userData = user;
+});
          }
 
    removePost(postId: string) : void {

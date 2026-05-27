@@ -5,6 +5,7 @@ import { IFeed } from '../../core/models/i-feed.interface';
 import { CommentsService } from '../feed/feed-content/post-comment/comments.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Comment } from './../feed/feed-content/post-comment/comment.interface';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-details',
@@ -17,7 +18,12 @@ export class DetailsComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly postsService = inject(PostsService);
   private readonly commentsService = inject(CommentsService);
+  private readonly userService = inject(UserService);
   private readonly router = inject(Router);
+ currentUser: any;
+   userData: any = null;
+
+
 
   commentContent: FormControl = new FormControl('');
 
@@ -29,46 +35,33 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.userId = JSON.parse(
-      localStorage.getItem('socialUser')!
-    )?._id;
+ this.userService.userData.subscribe(user => {
+  this.userData = user;
+  this.currentUser = user;
+  this.userId = user?._id;
+});
 
-    this.activatedRoute.paramMap.subscribe((parm) => {
+  this.activatedRoute.paramMap.subscribe((parm) => {
+    this.postId = parm.get('id')!;
+    this.getPostDetails();
+    this.getPostComments();
+  });
 
-      this.postId = parm.get('id')!;
-
-      this.getPostDetails();
-      this.getPostComments();
-
-    });
-
-  }
+}
 
   getPostDetails(): void {
+  this.postsService.getSinglePost(this.postId).subscribe({
+    next: (res) => {
+      const post = res.data.post;
 
-    this.postsService.getSinglePost(this.postId).subscribe({
-
-      next: (res) => {
-
-        console.log(res);
-
-        this.postDetails = {
-
-          ...res.data.post,
-
-          isLiked: res.data.post.likes.includes(this.userId)
-
-        };
-
-      },
-
-      error: (err) => {
-        console.log(err);
-      }
-
-    });
-
-  }
+      this.postDetails = {
+        ...post,
+        isLiked: post.likes.includes(this.userId || '')
+      };
+    },
+    error: (err) => console.log(err)
+  });
+}
 
   getPostComments(): void {
 

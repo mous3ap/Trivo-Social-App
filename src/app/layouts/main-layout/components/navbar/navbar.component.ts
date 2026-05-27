@@ -12,35 +12,32 @@ import { UserService } from '../../../../core/services/user.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
- userData: any = null;
-  private readonly authService = inject(AuthService);
+ private readonly authService = inject(AuthService);
   private readonly notificationService = inject(NotificationService);
   private readonly userService = inject(UserService);
 
+  userData: any = null;
   unreadCount: number = 0;
 
   ngOnInit(): void {
 
-    // Get unread count
     this.notificationService.unreadCount$
       .subscribe(count => {
         this.unreadCount = count;
       });
 
-    // First fetch
     this.notificationService.getNotifications();
-
-    // Start auto refresh
     this.notificationService.startPolling();
 
     this.userService.userData.subscribe(user => {
-  this.userData = user;
-});
+      this.userData = user;
+    });
 
   }
+
   ngOnDestroy(): void {
-  this.notificationService.stopPolling();
-}
+    this.notificationService.stopPolling();
+  }
 
   logOut(): void {
     this.authService.signOut();

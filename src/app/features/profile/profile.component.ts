@@ -172,8 +172,8 @@ uploadProfilePhoto(event: Event): void {
 
       if (res.success) {
 
+        this.userService.updateUserPhoto(res.data.photo);
         this.userProfile.photo = res.data.photo;
-        this.userService.setUserData(this.userProfile);
 
       }
 

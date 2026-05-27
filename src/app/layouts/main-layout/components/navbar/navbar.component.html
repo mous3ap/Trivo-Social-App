@@ -109,7 +109,7 @@ class="relative px-4 py-2  font-medium flex items-center gap-2 text-gray-400 hov
             <label for="profile-toggle" class="fixed inset-0 w-screen h-screen bg-transparent hidden peer-checked:block z-10 cursor-default"></label>
             
             <label for="profile-toggle" class="gradient-border-avatar rounded-full transition transform hover:scale-105 cursor-pointer z-20 block">
-                <img [src]="userData?.photo || '/Gemini_Generated_Image_mh7bmpmh7bmpmh7b.png'" 
+                <img [src]="userData?.photo" 
                     [alt]="userData?.name" 
                     class="w-8 h-8 rounded-full object-cover border border-[#060713]">
             </label>
@@ -121,7 +121,7 @@ class="relative px-4 py-2  font-medium flex items-center gap-2 text-gray-400 hov
                 
                 <div class="flex items-center gap-3 pb-4 border-b border-white/5">
                     <div class="gradient-border-avatar rounded-full">
-                        <img [src]="userData?.photo || '/Gemini_Generated_Image_mh7bmpmh7bmpmh7b.png'" 
+                        <img [src]="userData?.photo" 
                             [alt]="userData?.name" 
                             class="w-10 h-10 rounded-full object-cover border border-[#111229]">
                     </div>

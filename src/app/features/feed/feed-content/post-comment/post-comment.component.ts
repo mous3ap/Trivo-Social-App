@@ -2,6 +2,7 @@ import { Component, inject, Input, input, OnInit } from '@angular/core';
 import { CommentsService } from './comments.service';
 import { Comment } from './comment.interface';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-post-comment',
@@ -11,13 +12,20 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class PostCommentComponent implements OnInit {
   private readonly commentsService = inject(CommentsService);
+    private readonly userService = inject(UserService);
+  
+
   
  commentContent: FormControl = new FormControl('');
   @Input() postId:string = "" ;
   commentList : Comment[] = [];
+  userData: any;
 
 ngOnInit(): void {
   this.getCommentPost();
+  this.userService.userData.subscribe(user => {
+      this.userData = user;
+    });
 }
 
 getCommentPost(): void {

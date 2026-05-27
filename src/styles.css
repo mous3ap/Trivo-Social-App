@@ -17,8 +17,7 @@
 
 body {
     @apply bg-[#0a1526] text-white;
-    font-family: "SN Pro", sans-serif;
-}
+       font-family: 'Inter', system-ui, sans-serif;}
 
 .ngx-spinner-overlay.fade-out {
   pointer-events: none !important;

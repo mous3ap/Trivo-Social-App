@@ -25,4 +25,5 @@ export interface User {
   followingCount: number
   bookmarksCount: number
   id: string
+  isFollowing?: boolean;
 }

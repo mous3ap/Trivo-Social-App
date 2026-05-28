@@ -5,7 +5,6 @@ import {
   signal,
 } from '@angular/core';
 
-import { DatePipe } from '@angular/common';
 
 import {
   Notification,
@@ -13,10 +12,11 @@ import {
 
 import { NotificationService } from '../../core/services/notification.service';
 import { Router } from '@angular/router';
+import { TimeAgoPipe } from '../../shared/pipes/date-pipe';
 
 @Component({
   selector: 'app-notifications',
-  imports: [DatePipe],
+  imports: [TimeAgoPipe],
   templateUrl: './notifications.component.html',
   styleUrl: './notifications.component.css',
 })

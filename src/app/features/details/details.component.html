@@ -27,7 +27,7 @@
                     <div class="flex items-center gap-2 text-sm text-gray-500 font-medium">
                         <span>@{{postDetails.user.username}}</span>
                         <span class="w-1 h-1 rounded-full bg-gray-600"></span>
-                        <span>{{postDetails.createdAt}}</span>
+                        <span>{{postDetails.createdAt | timeAgo}}</span>
                     </div>
                 </div>
             </div>
@@ -191,7 +191,7 @@
                             </p>
                         </div>
                         <div class="flex items-center gap-3 mt-1.5 ml-2 text-[11px] text-gray-500 font-medium">
-                            <span class="text-gray-600">{{comment.createdAt}}</span>
+                            <span class="text-gray-600">{{comment.createdAt | timeAgo}}</span>
                             <button class="hover:text-purple-400 transition-colors cursor-pointer flex items-center gap-1">{{comment.likes}} Like</button>
                             <span class="text-gray-600/60">•</span>
                             <button class="hover:text-white transition-colors cursor-pointer">Reply</button>

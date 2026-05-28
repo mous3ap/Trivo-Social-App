@@ -1,4 +1,4 @@
-<div [class]="'glass-card w-full rounded-4xl p-6 ' + customClass" >
+<div [class]="'glass-card relative overflow-visible w-full rounded-4xl p-6 ' + customClass">
         
         <div 
         
@@ -19,7 +19,7 @@
                     <div class="flex items-center gap-2 text-sm text-gray-500 font-medium">
                         <span>@{{post.user.username}}</span>
                         <span class="w-1 h-1 rounded-full bg-gray-600"></span>
-                        <span>{{post.createdAt}}</span>
+                        <span>{{post.createdAt | timeAgo}}</span>
                     </div>
                 </div>
             </div>

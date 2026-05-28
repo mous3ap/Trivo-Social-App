@@ -100,30 +100,54 @@ ngOnInit(): void {
 
   }
 
-  getUserProfile(userId: string): void {
-
+getUserProfile(userId: string): void {
   this.userService.getUserProfile(userId).subscribe({
-
     next: (res: any) => {
-
-      console.log(res);
+      console.log('Profile Data from API:', res); // راجع السطر ده في الكونسول
 
       if (res.success) {
-
         this.userProfile = res.data.user;
+        
+        if (res.data.isFollowing !== undefined) {
+            this.userProfile.isFollowing = res.data.isFollowing;
+        }
 
         const loggedInUserId = localStorage.getItem('userId');
-
         this.isOwner = this.userProfile._id === loggedInUserId;
 
         this.getMyPosts(userId);
+      }
+    },
+    error: (err) => {
+      console.log(err);
+    }
+  });
+}
+
+followUser(userId: string): void {
+
+  this.userService.getFollowUser(userId).subscribe({
+
+    next: (res: any) => {
+
+      this.userProfile.isFollowing = res.data.following;
+
+      if (res.data.following) {
+
+        this.userProfile.followersCount++;
+
+      } else {
+
+        this.userProfile.followersCount--;
 
       }
 
     },
 
     error: (err) => {
+
       console.log(err);
+
     }
 
   });

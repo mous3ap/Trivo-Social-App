@@ -69,7 +69,7 @@ class="flex items-center justify-between gap-4 p-4 rounded-2xl transition-all du
             </p>
 
             <p class="text-gray-500 text-[11px] mt-1">
-                {{ notification.createdAt | date:'short' }}
+                {{ notification.createdAt | timeAgo}}
             </p>
 
         </div>

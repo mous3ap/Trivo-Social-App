@@ -6,10 +6,11 @@ import { CommentsService } from '../feed/feed-content/post-comment/comments.serv
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Comment } from './../feed/feed-content/post-comment/comment.interface';
 import { UserService } from '../../core/services/user.service';
+import { TimeAgoPipe } from '../../shared/pipes/date-pipe';
 
 @Component({
   selector: 'app-details',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule , TimeAgoPipe],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css',
 })

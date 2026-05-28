@@ -3,10 +3,11 @@ import { CommentsService } from './comments.service';
 import { Comment } from './comment.interface';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../../../core/services/user.service';
+import { TimeAgoPipe } from '../../../../shared/pipes/date-pipe';
 
 @Component({
   selector: 'app-post-comment',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule , TimeAgoPipe],
   templateUrl: './post-comment.component.html',
   styleUrl: './post-comment.component.css',
 })

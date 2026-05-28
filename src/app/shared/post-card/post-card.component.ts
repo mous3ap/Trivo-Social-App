@@ -5,10 +5,12 @@ import { PostCommentComponent } from "../../features/feed/feed-content/post-comm
 import { PostsService } from '../../core/services/posts.service';
 import { Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../core/services/user.service';
+import { DatePipe } from '@angular/common';
+import { TimeAgoPipe } from '../pipes/date-pipe';
 
 @Component({
   selector: 'app-post-card',
-  imports: [RouterLink, PostCommentComponent],
+  imports: [RouterLink, PostCommentComponent , TimeAgoPipe],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.css'
 })
